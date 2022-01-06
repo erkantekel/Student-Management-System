@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.javaguides.sms.entity.Class;
 import net.javaguides.sms.service.ClassService;
@@ -77,6 +78,7 @@ public class ClassConroller {
 		return "redirect:/classes";
 	}
 	private boolean btn =false;
+	@ResponseBody
 	@GetMapping("/classes/students/{className}")
 	public String classStudents(@PathVariable String className, Model model) {
 		btn = !btn;
