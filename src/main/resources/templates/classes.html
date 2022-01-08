@@ -82,27 +82,24 @@
 		      };
 		 
 		      $.ajax({
-		       type : "POST",
+		       type : "GET",
 		       url : "/classes/student",
-		       data : JSON.stringify(json),
-		       success : function(data) {
-		        var html = '';
-		        var len = data.length;
-		        html += '<option value="0"></option>';
-		        for (var i = 0; i < len; i++) {
-		         html += '<option value="' + data[i].id + '">'
-		           + data[i].name
-		           + '</option>';
-		        }
-		        html += '</option>';
-		        $('#students').html(html);
-		       },
-		       error : function(e) {
-		        alert(e);
-		       }
-		      });
-		    });
-		   });
+		       data:{name:name},
+		       success : function(response) {
+		    	   console.log(response);
+				    
+				    var finalResponse = JSON.stringify(response);
+				    
+				    $("#responseDiv").html("<b>Your response is : " +finalResponse+"</b>");
+				    	 		    	 
+				     },
+				     error: function (response){
+
+					 		console.log(response);
+				      }
+			   });
+		})
+		})
 		       
 		       
 		</script>

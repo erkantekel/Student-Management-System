@@ -1,5 +1,7 @@
 package net.javaguides.sms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.javaguides.sms.entity.Class;
+import net.javaguides.sms.entity.Student;
 import net.javaguides.sms.service.ClassService;
 import net.javaguides.sms.service.StudentService;
 
@@ -80,14 +83,15 @@ public class ClassConroller {
 	private boolean btn =false;
 	@ResponseBody
 	@GetMapping("/classes/students/{className}")
-	public String classStudents(@PathVariable String className, Model model) {
+	public List<Student> classStudents(@PathVariable String className) {
 		btn = !btn;
 		if(btn) {
-			model.addAttribute("students", studentService.getStudentByClassName(className));
+			List<Student> students = studentService.getStudentByClassName(className);
+			return students;
 		}else {
-			model.addAttribute("students", null);
+			List<Student> students = null;
+			return students;
 		}
-		return "redirect:/classes";
 	}
 }
 
