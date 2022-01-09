@@ -61,7 +61,8 @@
 						 class = "btn btn-primary">Update</a>
 						
 						<a th:href = "@{/students/delete/{id}(id=${student.id})}"
-						 class = "btn btn-danger">Delete</a>
+						 class = "btn btn-danger"
+						 onclick="return confirm('Are you sure you want to delete ?')">Delete</a>
 						 
 					</td>
 				</tr>
