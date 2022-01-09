@@ -1,7 +1,5 @@
 package net.javaguides.sms.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.javaguides.sms.entity.Class;
-import net.javaguides.sms.entity.Student;
 import net.javaguides.sms.service.ClassService;
 import net.javaguides.sms.service.StudentService;
 
@@ -34,11 +30,7 @@ public class ClassConroller {
 	@GetMapping("/classes")
 	public String listClasss(Model model) {
 		model.addAttribute("classes", classService.getAllClasses());
-//		if(btn) {
-//			model.addAttribute("students", studentService.getAllStudents());
-//		}else {
-//			model.addAttribute("students", null);
-//		}
+
 		return "classes";
 	}
 	
@@ -80,18 +72,15 @@ public class ClassConroller {
 		classService.deleteClassById(cid);
 		return "redirect:/classes";
 	}
-	private boolean btn =false;
-	@ResponseBody
+	
+	
 	@GetMapping("/classes/students/{className}")
-	public List<Student> classStudents(@PathVariable String className) {
-		btn = !btn;
-		if(btn) {
-			List<Student> students = studentService.getStudentByClassName(className);
-			return students;
-		}else {
-			List<Student> students = null;
-			return students;
-		}
+	public String classStudents(@PathVariable String className,
+												Model model) {
+		
+		model.addAttribute("students", studentService.getStudentByClassName(className));
+			
+		return "classes_students";
 	}
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Student Management System</title>
@@ -59,13 +59,9 @@
 						
 						<a th:href = "@{/classes/delete/{cid}(cid=${class_.cid})}"
 						 class = "btn btn-danger">Delete</a>
-												  
+										  
 						 <a  th:href = "@{/classes/students/{className} (className=${class_.className})}"
-						 class = "btn btn-info " >Students</a>
-						 
-						 <th:block th:each="student : ${students}">
-    						<a id = "countryId" class="dropdown-item"  th:text = "${student.firstName}"  href="#"></a>
-    					  </th:block>
+						 class = "btn btn-success" >Students</a>
 
 					</td>
 				</tr>
@@ -74,33 +70,29 @@
 		</table>
 		
 		<script >
+		function fetchUser(){
 		$(document).ready(function() {
 		    $("#countryId").change(function() {
-		      var students = $(this).find(":selected").val();
-		      var json = {
-		       "students" : students
-		      };
+		    	var tableData = "";
 		 
 		      $.ajax({
 		       type : "GET",
 		       url : "/classes/student",
-		       data:{name:name},
 		       success : function(response) {
 		    	   console.log(response);
-				    
-				    var finalResponse = JSON.stringify(response);
-				    
-				    $("#responseDiv").html("<b>Your response is : " +finalResponse+"</b>");
-				    	 		    	 
-				     },
-				     error: function (response){
-
-					 		console.log(response);
-				      }
-			   });
+		   	    
+		   	    response.forEach(function(item){
+		   	    	tableData += '<tr>' +
+		         	  		'<td id = "slNo'+student.id+'">' + student.id + '</td>' +
+		         	  		'<td id = "name'+ student.id +'">' + student.fistName + '</td>' +
+		         	  		'<td id = "email'+ student.id +'">' + student.email+ '</td>' +
+		         	  		'</tr>';
+		           });
+		       }
+		      })
+		      })
 		})
-		})
-		       
+		}       
 		       
 		</script>
 	
